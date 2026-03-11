@@ -130,29 +130,31 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-10 px-4 animate-in fade-in">
       <div className="max-w-5xl mx-auto space-y-8">
 
         {/* Header */}
-        <div>
-          <h1 className="text-3xl font-bold text-gray-800">UniConnect</h1>
-          <p className="text-gray-500 mt-1">User Management</p>
+        <div className="text-center">
+          <h1 className="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+            UniConnect
+          </h1>
+          <p className="text-gray-600 mt-1 text-lg">User Management Dashboard</p>
         </div>
 
         {/* Flash messages */}
         {success && (
-          <div className="bg-green-50 border border-green-300 text-green-700 px-4 py-3 rounded-lg text-sm">
+          <div className="bg-green-50 border border-green-300 text-green-700 px-4 py-3 rounded-lg text-sm animate-in slide-in-from-top-2">
             {success}
           </div>
         )}
         {error && (
-          <div className="bg-red-50 border border-red-300 text-red-700 px-4 py-3 rounded-lg text-sm">
+          <div className="bg-red-50 border border-red-300 text-red-700 px-4 py-3 rounded-lg text-sm animate-in slide-in-from-top-2">
             {error}
           </div>
         )}
 
         {/* Create User Form */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-3xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition-all animate-in slide-in-from-left-5">
           <h2 className="text-lg font-semibold text-gray-700 mb-4">Add New User</h2>
           {formError && (
             <div className="bg-red-50 border border-red-300 text-red-600 px-3 py-2 rounded-lg text-sm mb-4">
@@ -214,7 +216,7 @@ export default function Home() {
         </div>
 
         {/* Users Table */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+        <div className="bg-white rounded-3xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition-all animate-in slide-in-from-right-5">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-gray-700">All Users</h2>
             <button
@@ -244,8 +246,8 @@ export default function Home() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                  {users.map((user) => (
-                    <tr key={user.id} className="hover:bg-gray-50 transition">
+                  {users.map((user, idx) => (
+                    <tr key={user.id} className="hover:bg-gray-50 transition animate-in slide-in-from-bottom-2" style={{ animationDelay: `${idx * 60}ms` }}>
                       <td className="py-3 pr-4 text-gray-400">{user.id}</td>
                       <td className="py-3 pr-4 font-mono text-gray-700">{user.user_id}</td>
                       <td className="py-3 pr-4 font-medium text-gray-800">{user.full_name}</td>

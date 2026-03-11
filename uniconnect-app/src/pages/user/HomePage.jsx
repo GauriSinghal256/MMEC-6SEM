@@ -29,7 +29,7 @@ const posts = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex bg-[#fafafa]">
+    <div className="min-h-screen flex bg-gradient-to-br from-blue-50 via-white to-purple-50 animate-in fade-in">
 
       {/* Sidebar */}
       <div className="sticky top-0 h-screen">
@@ -39,14 +39,20 @@ export default function HomePage() {
       {/* Main Area */}
       <div className="flex-1 flex justify-center">
 
-        <div className="w-full max-w-6xl flex gap-10 px-8 py-10">
+        <div className="w-full max-w-6xl flex gap-10 px-8 py-10 animate-in fade-in">
 
           {/* Feed */}
           <div className="flex-1 max-w-2xl space-y-6">
           
             {/* Posts */}
             {posts.map((post, i) => (
-              <PostCard key={i} {...post} />
+              <div
+                key={i}
+                className="animate-in fade-in slide-in-from-bottom-4"
+                style={{ animationDelay: `${i * 120}ms` }}
+              >
+                <PostCard {...post} />
+              </div>
             ))}
 
           </div>
@@ -54,32 +60,32 @@ export default function HomePage() {
           {/* Right Panel */}
           <div className="hidden lg:block w-[300px]">
 
-            <div className="sticky top-10 space-y-6">
+            <div className="sticky top-10 space-y-6 animate-in slide-in-from-right-5">
 
               <SuggestionCard />
 
               {/* Trends */}
-              <div className="border border-gray-200 rounded-xl p-4 bg-white">
+              <div className="border border-gray-200 rounded-xl p-4 bg-white hover:shadow-lg transition-shadow">
 
                 <h3 className="text-sm font-semibold text-gray-700 mb-3">
                   Trending
                 </h3>
 
-                <div className="space-y-2 text-sm text-gray-500">
+                <div className="space-y-2 text-sm text-gray-600">
 
-                  <div className="hover:text-gray-800 cursor-pointer">
+                  <div className="hover:text-blue-600 cursor-pointer transition-colors">
                     #ReactDevelopment
                   </div>
 
-                  <div className="hover:text-gray-800 cursor-pointer">
+                  <div className="hover:text-purple-600 cursor-pointer transition-colors">
                     #Hackathon
                   </div>
 
-                  <div className="hover:text-gray-800 cursor-pointer">
+                  <div className="hover:text-green-600 cursor-pointer transition-colors">
                     #OpenSource
                   </div>
 
-                  <div className="hover:text-gray-800 cursor-pointer">
+                  <div className="hover:text-pink-600 cursor-pointer transition-colors">
                     #StartupIdeas
                   </div>
 
@@ -96,7 +102,7 @@ export default function HomePage() {
       </div>
 
       {/* Floating Create Button */}
-      <button className="fixed bottom-8 right-8 bg-blue-600 text-white px-5 py-3 rounded-full text-sm font-medium hover:bg-blue-700 transition">
+      <button className="fixed bottom-8 right-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 py-3 rounded-full text-sm font-medium hover:shadow-xl transition transform hover:scale-110 animate-pulse">
         + Create Post
       </button>
 
