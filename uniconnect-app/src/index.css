@@ -329,14 +329,6 @@ input:-webkit-autofill:focus {
   position: relative;
   flex-shrink: 0;
 }
-.live-dot::after {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  background: rgba(16,185,129,0.25);
-  animation: pulseCyan 1.8s ease-out infinite;
-}
 
 /* ─── Glow dot ───────────────────────────────── */
 .accent-dot {
