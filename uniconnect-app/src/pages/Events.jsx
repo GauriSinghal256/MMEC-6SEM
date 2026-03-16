@@ -78,51 +78,49 @@ export default function Events() {
         <Sidebar />
       </div>
 
-      <div className="flex-1 overflow-y-auto">
-        <div className="max-w-5xl mx-auto px-6 py-8">
+      <div className="flex-1 overflow-y-auto pb-24 md:pb-0">
+        <div className="max-w-5xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
 
           {/* Header */}
-          <div className="flex items-center justify-between mb-8 animate-fade-up">
+          <div className="flex items-center justify-between mb-5 sm:mb-8 animate-fade-up">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <CalendarDays size={18} className="text-violet-400" />
-                <h1 className="font-display text-3xl font-semibold text-[#F9FAFB]">Events</h1>
+                <CalendarDays size={16} className="text-violet-400" />
+                <h1 className="font-display text-2xl sm:text-3xl font-semibold text-[#F9FAFB]">Events</h1>
               </div>
-              <p className="text-sm text-[#6B7280]">Discover and attend events in your network</p>
+              <p className="text-xs sm:text-sm text-[#6B7280]">Discover and attend events in your network</p>
             </div>
-            <button className="btn-gold px-5 py-2.5 rounded-full text-sm flex items-center gap-2">
-              <Plus size={15} /> Create Event
+            <button className="btn-gold px-3 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm flex items-center gap-1.5">
+              <Plus size={13} /> <span className="hidden sm:inline">Create Event</span><span className="sm:hidden">New</span>
             </button>
           </div>
 
           {/* Featured event */}
           {events.filter(e => e.featured).map(event => (
             <div key={event.id}
-              className="card overflow-hidden mb-8 animate-fade-up stagger-1 relative"
+              className="card overflow-hidden mb-5 sm:mb-8 animate-fade-up stagger-1 relative"
               style={{ background: 'linear-gradient(135deg, #0F172A, #1E1B4B)' }}
             >
               <div className="absolute inset-0 opacity-10"
                 style={{ backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(99,102,241,0.4) 30px, rgba(99,102,241,0.4) 31px)` }}
               />
-              <div className="relative z-10 p-7 flex flex-col md:flex-row md:items-center gap-6">
+              <div className="relative z-10 p-4 sm:p-7 flex flex-col md:flex-row md:items-center gap-4 sm:gap-6">
                 <div className="flex-1">
-                  <span className="text-[10px] font-semibold tracking-widest text-violet-400 uppercase mb-3 block">
-                    ✦ Featured Event
-                  </span>
-                  <h2 className="font-display text-2xl font-semibold text-white mb-2">{event.title}</h2>
-                  <p className="text-sm text-[#9CA3AF] mb-4 leading-relaxed max-w-lg">{event.desc}</p>
-                  <div className="flex flex-wrap gap-4 text-xs text-[#6B7280]">
-                    <span className="flex items-center gap-1.5"><CalendarDays size={12} />{event.date}</span>
-                    <span className="flex items-center gap-1.5"><Clock size={12} />{event.time}</span>
-                    <span className="flex items-center gap-1.5"><MapPin size={12} />{event.location}</span>
-                    <span className="flex items-center gap-1.5"><Users size={12} />{event.attendees} attending</span>
+                  <span className="text-[10px] font-semibold tracking-widest text-violet-400 uppercase mb-2 sm:mb-3 block">✦ Featured Event</span>
+                  <h2 className="font-display text-xl sm:text-2xl font-semibold text-white mb-2">{event.title}</h2>
+                  <p className="text-xs sm:text-sm text-[#9CA3AF] mb-3 sm:mb-4 leading-relaxed">{event.desc}</p>
+                  <div className="flex flex-wrap gap-2 sm:gap-4 text-xs text-[#6B7280]">
+                    <span className="flex items-center gap-1"><CalendarDays size={11} />{event.date}</span>
+                    <span className="flex items-center gap-1"><Clock size={11} />{event.time}</span>
+                    <span className="flex items-center gap-1"><MapPin size={11} />{event.location}</span>
+                    <span className="flex items-center gap-1"><Users size={11} />{event.attendees} attending</span>
                   </div>
                 </div>
                 <button
                   onClick={() => toggleRegister(event.id)}
-                  className={`px-7 py-3 rounded-full text-sm font-semibold flex-shrink-0 transition-all
+                  className={`w-full md:w-auto px-6 sm:px-7 py-2.5 sm:py-3 rounded-full text-sm font-semibold flex-shrink-0 transition-all
                     ${registered.has(event.id)
-                      ? 'bg-[#111111]/10 text-white border border-[#111]/20 hover:bg-[#111111]/20'
+                      ? 'bg-[#111111]/10 text-white border border-[#111]/20'
                       : 'btn-gold'
                     }`}
                 >
@@ -133,8 +131,8 @@ export default function Events() {
           ))}
 
           {/* Search + Filters */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-6 animate-fade-up stagger-2">
-            <div className="relative flex-1 max-w-sm">
+          <div className="flex flex-col gap-3 sm:gap-4 mb-4 sm:mb-6 animate-fade-up stagger-2">
+            <div className="relative">
               <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]" />
               <input
                 value={search}
@@ -143,11 +141,11 @@ export default function Events() {
                 className="w-full pl-10 pr-4 py-2.5 rounded-full border border-[#111]/[0.12] bg-[#111111] text-sm text-[#F9FAFB] focus:outline-none focus:border-violet-500 transition-all placeholder:text-[#6B7280]"
               />
             </div>
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar pb-1">
               {tags.map(tag => (
                 <button key={tag}
                   onClick={() => setFilter(tag)}
-                  className={`px-4 py-2 rounded-full text-xs font-medium transition-all
+                  className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-medium transition-all flex-shrink-0
                     ${filter === tag
                       ? 'btn-gold text-white'
                       : 'border border-[#111]/[0.12] text-[#6B7280] bg-[#111111] hover:border-violet-500 hover:text-violet-400'
@@ -160,51 +158,54 @@ export default function Events() {
           </div>
 
           {/* Events list */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {filtered.filter(e => !e.featured).map((event, idx) => (
               <div key={event.id}
-                className="card card-interactive p-5 flex flex-col sm:flex-row sm:items-center gap-5 animate-fade-up"
+                className="card card-interactive p-4 sm:p-5 animate-fade-up"
                 style={{ animationDelay: `${idx * 80}ms` }}
               >
-                {/* Date block */}
-                <div className="w-16 h-16 rounded-2xl bg-violet-950/40 border border-[#111]/[0.07] flex flex-col items-center justify-center flex-shrink-0">
-                  <span className="text-[10px] font-semibold text-violet-400 uppercase tracking-wide">
-                    {event.date.split(' ')[0]}
-                  </span>
-                  <span className="text-2xl font-display font-bold text-[#F9FAFB] leading-none">
-                    {event.date.split(' ')[1]?.replace(',', '')}
-                  </span>
-                </div>
-
-                <div className="flex-1">
-                  <div className="flex items-start gap-2 mb-1">
-                    <h2 className="text-base font-semibold text-[#F9FAFB]">{event.title}</h2>
-                    <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-violet-950/40 text-violet-400 border border-[#111]/[0.07] flex-shrink-0 mt-0.5">
-                      {event.tag}
+                <div className="flex gap-3 sm:gap-5">
+                  {/* Date block */}
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-violet-950/40 border border-[#111]/[0.07] flex flex-col items-center justify-center flex-shrink-0">
+                    <span className="text-[9px] sm:text-[10px] font-semibold text-violet-400 uppercase tracking-wide">
+                      {event.date.split(' ')[0]}
+                    </span>
+                    <span className="text-xl sm:text-2xl font-display font-bold text-[#F9FAFB] leading-none">
+                      {event.date.split(' ')[1]?.replace(',', '')}
                     </span>
                   </div>
-                  <p className="text-xs text-[#D1D5DB] mb-2 leading-relaxed">{event.desc}</p>
-                  <div className="flex flex-wrap gap-3 text-xs text-[#6B7280]">
-                    <span className="flex items-center gap-1"><Clock size={11} />{event.time}</span>
-                    <span className="flex items-center gap-1"><MapPin size={11} />{event.location}</span>
-                    <span className="flex items-center gap-1"><Users size={11} />{event.attendees} attending</span>
-                  </div>
-                </div>
 
-                <div className="flex items-center gap-2 flex-shrink-0">
-                  <button className="p-2 rounded-xl text-[#6B7280] hover:text-violet-400 hover:bg-violet-950/40 transition-all">
-                    <ExternalLink size={15} />
-                  </button>
-                  <button
-                    onClick={() => toggleRegister(event.id)}
-                    className={`px-5 py-2 rounded-full text-xs font-semibold transition-all
-                      ${registered.has(event.id)
-                        ? 'bg-violet-950/40 text-violet-400 border border-[#111]/[0.12]'
-                        : 'btn-gold'
-                      }`}
-                  >
-                    {registered.has(event.id) ? '✓ Registered' : 'Register'}
-                  </button>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start gap-2 mb-1 flex-wrap">
+                      <h2 className="text-sm font-semibold text-[#F9FAFB]">{event.title}</h2>
+                      <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-violet-950/40 text-violet-400 border border-[#111]/[0.07] flex-shrink-0">
+                        {event.tag}
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#D1D5DB] mb-2 leading-relaxed line-clamp-2">{event.desc}</p>
+                    <div className="flex flex-wrap gap-2 sm:gap-3 text-xs text-[#6B7280]">
+                      <span className="flex items-center gap-1"><Clock size={10} />{event.time}</span>
+                      <span className="flex items-center gap-1"><MapPin size={10} />{event.location}</span>
+                      <span className="flex items-center gap-1"><Users size={10} />{event.attendees}</span>
+                    </div>
+
+                    {/* Actions row */}
+                    <div className="flex items-center gap-2 mt-3">
+                      <button className="p-1.5 rounded-xl text-[#6B7280] hover:text-violet-400 hover:bg-violet-950/40 transition-all">
+                        <ExternalLink size={13} />
+                      </button>
+                      <button
+                        onClick={() => toggleRegister(event.id)}
+                        className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs font-semibold transition-all
+                          ${registered.has(event.id)
+                            ? 'bg-violet-950/40 text-violet-400 border border-[#111]/[0.12]'
+                            : 'btn-gold'
+                          }`}
+                      >
+                        {registered.has(event.id) ? '✓ Registered' : 'Register'}
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}

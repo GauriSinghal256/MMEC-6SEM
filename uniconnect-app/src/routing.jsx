@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
+import BottomNav from './components/BottomNav'
 import Home from './pages/Home'
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
@@ -18,10 +19,12 @@ import FeedRedirect from './pages/Feed'
 import Collabs from './pages/Collabs'
 
 const noHeaderRoutes = ['/login', '/auth', '/forgot-password', '/reset-password', '/home', '/feed', '/groups', '/inbox', '/events', '/jobs', '/notifications', '/profile', '/collabs']
+const showBottomNavRoutes = ['/home', '/feed', '/groups', '/inbox', '/events', '/jobs', '/notifications', '/profile', '/collabs']
 
 function Layout() {
   const location = useLocation()
   const showHeader = !noHeaderRoutes.some(r => location.pathname.startsWith(r))
+  const showBottomNav = showBottomNavRoutes.some(r => location.pathname.startsWith(r))
 
   return (
     <>
@@ -43,6 +46,7 @@ function Layout() {
         <Route path="/collabs"         element={<Collabs />} />
         <Route path="/feed-old"        element={<FeedRedirect />} />
       </Routes>
+      {showBottomNav && <BottomNav />}
     </>
   )
 }

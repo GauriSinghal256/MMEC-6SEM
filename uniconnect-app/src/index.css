@@ -418,3 +418,20 @@ input:-webkit-autofill:focus {
   background: linear-gradient(90deg, transparent 0%, var(--accent-2) 50%, transparent 100%);
   box-shadow: 0 0 8px var(--accent-glow);
 }
+
+/* ─── Mobile / Phone responsive utilities ────────────────── */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Bottom nav safe area on iOS */
+nav.fixed.bottom-0 {
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+}
+
+/* Prevent horizontal overflow on mobile */
+@media (max-width: 640px) {
+  body { overflow-x: hidden; }
+  .card:hover { transform: none; }
+  .card-interactive:hover { transform: none; }
+}

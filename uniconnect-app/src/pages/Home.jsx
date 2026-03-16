@@ -89,42 +89,42 @@ export default function Home() {
   )
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] py-10 px-4 page-enter">
-      <div className="max-w-5xl mx-auto space-y-6">
+    <div className="min-h-screen bg-[#0A0A0A] py-6 sm:py-10 px-3 sm:px-4 page-enter">
+      <div className="max-w-5xl mx-auto space-y-4 sm:space-y-6">
 
         {/* Header */}
         <div className="text-center animate-fade-up">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <Sparkles size={20} className="text-violet-400" />
-            <h1 className="font-display text-4xl font-semibold text-[#F9FAFB]">UniConnect</h1>
+            <Sparkles size={18} className="text-violet-400" />
+            <h1 className="font-display text-3xl sm:text-4xl font-semibold text-[#F9FAFB]">UniConnect</h1>
           </div>
-          <p className="text-sm text-[#6B7280] tracking-wide">User Management Dashboard</p>
+          <p className="text-xs sm:text-sm text-[#6B7280] tracking-wide">User Management Dashboard</p>
         </div>
 
         {/* Toasts */}
         {success && (
-          <div className="bg-violet-950/40 border border-[color:var(--accent-light)] text-violet-400 px-5 py-3 rounded-xl text-sm flex items-center gap-2 animate-fade-up">
-            <span className="w-1.5 h-1.5 rounded-full bg-[color:var(--accent)] flex-shrink-0" />
+          <div className="bg-violet-950/40 border border-violet-700/40 text-violet-400 px-4 sm:px-5 py-3 rounded-xl text-sm flex items-center gap-2 animate-fade-up">
+            <span className="w-1.5 h-1.5 rounded-full bg-violet-500 flex-shrink-0" />
             {success}
           </div>
         )}
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-600 px-5 py-3 rounded-xl text-sm flex items-center gap-2 animate-fade-up">
+          <div className="bg-red-950/40 border border-red-900/50 text-red-400 px-4 sm:px-5 py-3 rounded-xl text-sm flex items-center gap-2 animate-fade-up">
             <span className="w-1.5 h-1.5 rounded-full bg-red-400 flex-shrink-0" />
             {error}
           </div>
         )}
 
         {/* Create User */}
-        <div className="card p-6 animate-fade-up stagger-1">
-          <div className="flex items-center gap-2 mb-5">
-            <Plus size={16} className="text-violet-400" />
-            <h2 className="font-display text-lg font-semibold text-[#F9FAFB]">Add New User</h2>
+        <div className="card p-4 sm:p-6 animate-fade-up stagger-1">
+          <div className="flex items-center gap-2 mb-4 sm:mb-5">
+            <Plus size={15} className="text-violet-400" />
+            <h2 className="font-display text-base sm:text-lg font-semibold text-[#F9FAFB]">Add New User</h2>
           </div>
           {formError && (
-            <div className="bg-red-50 border border-red-200 text-red-500 px-4 py-2.5 rounded-xl text-xs mb-4">{formError}</div>
+            <div className="bg-red-950/40 border border-red-900/50 text-red-400 px-4 py-2.5 rounded-xl text-xs mb-4">{formError}</div>
           )}
-          <form onSubmit={handleCreate} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <form onSubmit={handleCreate} className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
             <InputField label="User ID" type="text" value={form.user_id} onChange={e => setForm({ ...form, user_id: e.target.value })} placeholder="e.g. 11232763" />
             <InputField label="Full Name" type="text" value={form.full_name} onChange={e => setForm({ ...form, full_name: e.target.value })} placeholder="e.g. Sonu Kumar" />
             <InputField label="Email" type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="e.g. sonu@example.com" />
@@ -139,7 +139,7 @@ export default function Home() {
             </div>
             <div className="sm:col-span-2 flex justify-end">
               <button type="submit" disabled={submitting}
-                className="btn-gold px-8 py-2.5 rounded-full text-sm disabled:opacity-50"
+                className="btn-gold px-6 sm:px-8 py-2.5 rounded-full text-sm disabled:opacity-50 w-full sm:w-auto"
               >
                 {submitting ? 'Creating…' : 'Create User'}
               </button>
@@ -148,91 +148,125 @@ export default function Home() {
         </div>
 
         {/* Table */}
-        <div className="card p-6 animate-fade-up stagger-2">
-          <div className="flex items-center justify-between mb-5">
+        <div className="card p-4 sm:p-6 animate-fade-up stagger-2">
+          <div className="flex items-center justify-between mb-4 sm:mb-5">
             <div className="flex items-center gap-2">
-              <Users size={16} className="text-violet-400" />
-              <h2 className="font-display text-lg font-semibold text-[#F9FAFB]">All Users</h2>
-              <span className="text-xs bg-violet-950/40 text-violet-400 border border-[#111]/[0.07] px-2.5 py-0.5 rounded-full font-medium">
+              <Users size={15} className="text-violet-400" />
+              <h2 className="font-display text-base sm:text-lg font-semibold text-[#F9FAFB]">All Users</h2>
+              <span className="text-xs bg-violet-950/40 text-violet-400 border border-violet-700/40 px-2.5 py-0.5 rounded-full font-medium">
                 {users.length}
               </span>
             </div>
-            <button onClick={fetchUsers}
-              className="flex items-center gap-1.5 text-xs text-[#6B7280] hover:text-violet-400 transition-colors"
-            >
+            <button onClick={fetchUsers} className="flex items-center gap-1.5 text-xs text-[#6B7280] hover:text-violet-400 transition-colors">
               <RefreshCw size={13} />
-              Refresh
+              <span className="hidden sm:inline">Refresh</span>
             </button>
           </div>
 
           {loading ? (
             <div className="flex items-center justify-center py-14 gap-2 text-[#6B7280]">
-              <div className="w-4 h-4 rounded-full border-2 border-[color:var(--accent-light)] border-t-[color:var(--accent)] animate-spin" />
+              <div className="w-4 h-4 rounded-full border-2 border-violet-700/40 border-t-violet-500 animate-spin" />
               <span className="text-sm">Loading…</span>
             </div>
           ) : users.length === 0 ? (
             <div className="text-center py-14 text-sm text-[#6B7280]">No users found.</div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left">
-                <thead>
-                  <tr className="border-b border-[#111]/[0.07] text-[#6B7280] text-[10px] uppercase tracking-widest">
-                    {['ID','User ID','Full Name','Email','Role','Created At','Actions'].map(h => (
-                      <th key={h} className="pb-3 pr-5 font-medium">{h}</th>
+            <>
+              {/* Desktop table */}
+              <div className="hidden sm:block overflow-x-auto">
+                <table className="w-full text-sm text-left">
+                  <thead>
+                    <tr className="border-b border-[#111]/[0.07] text-[#6B7280] text-[10px] uppercase tracking-widest">
+                      {['ID', 'User ID', 'Full Name', 'Email', 'Role', 'Created At', 'Actions'].map(h => (
+                        <th key={h} className="pb-3 pr-5 font-medium">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.map((user, idx) => (
+                      <tr key={user.id} className="border-b border-[#111]/[0.07] hover:bg-violet-950/40 transition-colors animate-fade-in"
+                        style={{ animationDelay: `${idx * 40}ms` }}
+                      >
+                        <td className="py-3.5 pr-5 text-[#6B7280] text-xs">{user.id}</td>
+                        <td className="py-3.5 pr-5 font-mono text-xs text-[#D1D5DB]">{user.user_id}</td>
+                        <td className="py-3.5 pr-5 font-medium text-[#F9FAFB]">{user.full_name}</td>
+                        <td className="py-3.5 pr-5 text-[#6B7280]">{user.email}</td>
+                        <td className="py-3.5 pr-5">
+                          <span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wide uppercase
+                            ${user.role === 'teacher'
+                              ? 'bg-violet-950/40 text-violet-400 border border-violet-700/40'
+                              : 'bg-[#0A0A0A] text-[#D1D5DB] border border-[#111]/[0.07]'
+                            }`}>
+                            {user.role}
+                          </span>
+                        </td>
+                        <td className="py-3.5 pr-5 text-[#6B7280] text-xs">{user.created_at}</td>
+                        <td className="py-3.5 flex gap-2">
+                          <button onClick={() => openEdit(user)} className="p-1.5 rounded-lg text-[#6B7280] hover:bg-violet-950/40 hover:text-violet-400 transition-all">
+                            <Pencil size={13} />
+                          </button>
+                          <button onClick={() => setDeleteConfirm(user)} className="p-1.5 rounded-lg text-[#6B7280] hover:bg-red-950/40 hover:text-red-400 transition-all">
+                            <Trash2 size={13} />
+                          </button>
+                        </td>
+                      </tr>
                     ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {users.map((user, idx) => (
-                    <tr key={user.id} className="border-b border-[#111]/[0.07] hover:bg-violet-950/40 transition-colors animate-fade-in"
-                      style={{ animationDelay: `${idx * 40}ms` }}
-                    >
-                      <td className="py-3.5 pr-5 text-[#6B7280] text-xs">{user.id}</td>
-                      <td className="py-3.5 pr-5 font-mono text-xs text-[#D1D5DB]">{user.user_id}</td>
-                      <td className="py-3.5 pr-5 font-medium text-[#F9FAFB]">{user.full_name}</td>
-                      <td className="py-3.5 pr-5 text-[#6B7280]">{user.email}</td>
-                      <td className="py-3.5 pr-5">
-                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wide uppercase
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Mobile cards */}
+              <div className="sm:hidden space-y-3">
+                {users.map((user, idx) => (
+                  <div key={user.id} className="p-4 rounded-xl border border-[#111]/[0.07] bg-[#0A0A0A] animate-fade-in"
+                    style={{ animationDelay: `${idx * 40}ms` }}
+                  >
+                    <div className="flex items-start justify-between mb-2">
+                      <div>
+                        <p className="text-sm font-semibold text-[#F9FAFB]">{user.full_name}</p>
+                        <p className="text-xs text-[#6B7280] font-mono mt-0.5">{user.user_id}</p>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase
                           ${user.role === 'teacher'
-                            ? 'bg-violet-950/40 text-violet-400 border border-[#111]/[0.07]'
-                            : 'bg-[#0A0A0A] text-[#D1D5DB] border border-[#111]/[0.07]'
+                            ? 'bg-violet-950/40 text-violet-400 border border-violet-700/40'
+                            : 'bg-[#111] text-[#D1D5DB] border border-[#111]/[0.07]'
                           }`}>
                           {user.role}
                         </span>
-                      </td>
-                      <td className="py-3.5 pr-5 text-[#6B7280] text-xs">{user.created_at}</td>
-                      <td className="py-3.5 flex gap-2">
-                        <button onClick={() => openEdit(user)}
-                          className="p-1.5 rounded-lg text-[#6B7280] hover:bg-violet-950/40 hover:text-violet-400 transition-all"
-                        >
-                          <Pencil size={13} />
+                      </div>
+                    </div>
+                    <p className="text-xs text-[#6B7280] mb-3">{user.email}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] text-[#4B5563]">{user.created_at}</span>
+                      <div className="flex gap-1.5">
+                        <button onClick={() => openEdit(user)} className="p-2 rounded-lg text-[#6B7280] hover:bg-violet-950/40 hover:text-violet-400 transition-all border border-[#111]/[0.07]">
+                          <Pencil size={12} />
                         </button>
-                        <button onClick={() => setDeleteConfirm(user)}
-                          className="p-1.5 rounded-lg text-[#6B7280] hover:bg-red-50 hover:text-red-500 transition-all"
-                        >
-                          <Trash2 size={13} />
+                        <button onClick={() => setDeleteConfirm(user)} className="p-2 rounded-lg text-[#6B7280] hover:bg-red-950/40 hover:text-red-400 transition-all border border-[#111]/[0.07]">
+                          <Trash2 size={12} />
                         </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>
 
       {/* Edit Modal */}
       {editModal && (
-        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 px-4 animate-fade-in">
-          <div className="card w-full max-w-md p-7 animate-fade-up">
-            <div className="flex items-center justify-between mb-5">
-              <h3 className="font-display text-xl font-semibold text-[#F9FAFB]">Edit User</h3>
-              <button onClick={() => setEditModal(null)} className="text-[#6B7280] hover:text-[#F9FAFB] transition-colors">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-end sm:items-center justify-center z-50 px-0 sm:px-4 animate-fade-in">
+          <div className="card w-full sm:max-w-md p-5 sm:p-7 animate-fade-up rounded-b-none sm:rounded-2xl">
+            <div className="flex items-center justify-between mb-4 sm:mb-5">
+              <h3 className="font-display text-lg sm:text-xl font-semibold text-[#F9FAFB]">Edit User</h3>
+              <button onClick={() => setEditModal(null)} className="text-[#6B7280] hover:text-[#F9FAFB] transition-colors p-1">
                 <X size={18} />
               </button>
             </div>
-            {editError && <div className="bg-red-50 border border-red-200 text-red-500 px-4 py-2.5 rounded-xl text-xs mb-4">{editError}</div>}
+            {editError && <div className="bg-red-950/40 border border-red-900/50 text-red-400 px-4 py-2.5 rounded-xl text-xs mb-4">{editError}</div>}
             <form onSubmit={handleUpdate} className="space-y-4">
               {[
                 { label: 'User ID', field: 'user_id', type: 'text' },
@@ -253,9 +287,9 @@ export default function Home() {
                   <option value="teacher">Teacher</option>
                 </select>
               </div>
-              <div className="flex justify-end gap-3 pt-2">
-                <button type="button" onClick={() => setEditModal(null)} className="btn-outline px-5 py-2 rounded-full text-sm">Cancel</button>
-                <button type="submit" disabled={editSubmitting} className="btn-gold px-6 py-2 rounded-full text-sm disabled:opacity-50">
+              <div className="flex gap-3 pt-2">
+                <button type="button" onClick={() => setEditModal(null)} className="flex-1 btn-outline px-5 py-2.5 rounded-full text-sm">Cancel</button>
+                <button type="submit" disabled={editSubmitting} className="flex-1 btn-gold px-6 py-2.5 rounded-full text-sm disabled:opacity-50">
                   {editSubmitting ? 'Saving…' : 'Save Changes'}
                 </button>
               </div>
@@ -266,19 +300,19 @@ export default function Home() {
 
       {/* Delete Modal */}
       {deleteConfirm && (
-        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 px-4 animate-fade-in">
-          <div className="card w-full max-w-sm p-7 text-center animate-fade-up">
-            <div className="w-12 h-12 rounded-full bg-red-50 border border-red-200 flex items-center justify-center mx-auto mb-5">
-              <Trash2 size={20} className="text-red-400" />
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-end sm:items-center justify-center z-50 px-0 sm:px-4 animate-fade-in">
+          <div className="card w-full sm:max-w-sm p-5 sm:p-7 text-center animate-fade-up rounded-b-none sm:rounded-2xl">
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-red-950/40 border border-red-900/50 flex items-center justify-center mx-auto mb-4 sm:mb-5">
+              <Trash2 size={18} className="text-red-400" />
             </div>
-            <h3 className="font-display text-xl font-semibold text-[#F9FAFB] mb-2">Delete User?</h3>
-            <p className="text-sm text-[#6B7280] mb-7">
+            <h3 className="font-display text-lg sm:text-xl font-semibold text-[#F9FAFB] mb-2">Delete User?</h3>
+            <p className="text-sm text-[#6B7280] mb-5 sm:mb-7">
               Are you sure you want to remove <span className="font-medium text-[#F9FAFB]">{deleteConfirm.full_name}</span>? This cannot be undone.
             </p>
             <div className="flex justify-center gap-3">
-              <button onClick={() => setDeleteConfirm(null)} className="btn-outline px-5 py-2 rounded-full text-sm">Cancel</button>
+              <button onClick={() => setDeleteConfirm(null)} className="flex-1 btn-outline px-5 py-2.5 rounded-full text-sm">Cancel</button>
               <button onClick={handleDelete} disabled={deleting}
-                className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full text-sm font-medium transition-all disabled:opacity-50"
+                className="flex-1 bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all disabled:opacity-50"
               >
                 {deleting ? 'Deleting…' : 'Delete'}
               </button>

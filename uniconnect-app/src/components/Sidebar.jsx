@@ -70,7 +70,7 @@ export default function Sidebar() {
       ${collapsed ? 'w-[68px]' : 'w-[232px]'}
       h-screen px-3 py-6
       bg-[#0D0D0D] border-r border-[#111]/[0.06]
-      transition-all duration-300 ease-in-out
+      transition-all duration-300 ease-in-out flex-shrink-0
     `}>
       <div>
         {/* Logo */}

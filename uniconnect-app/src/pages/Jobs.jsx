@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Sidebar from '../components/Sidebar'
-import { Briefcase, MapPin, Clock, Building, Search, Bookmark, ExternalLink, Filter } from 'lucide-react'
+import { Briefcase, MapPin, Clock, Building, Search, Bookmark, ExternalLink } from 'lucide-react'
 
 const jobs = [
   {
@@ -97,23 +97,21 @@ export default function Jobs() {
         <Sidebar />
       </div>
 
-      <div className="flex-1 overflow-y-auto">
-        <div className="max-w-5xl mx-auto px-6 py-8">
+      <div className="flex-1 overflow-y-auto pb-24 md:pb-0">
+        <div className="max-w-5xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
 
           {/* Header */}
-          <div className="flex items-center justify-between mb-8 animate-fade-up">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <Briefcase size={18} className="text-violet-400" />
-                <h1 className="font-display text-3xl font-semibold text-[#F9FAFB]">Jobs & Referrals</h1>
-              </div>
-              <p className="text-sm text-[#6B7280]">Find opportunities tailored for students</p>
+          <div className="mb-5 sm:mb-8 animate-fade-up">
+            <div className="flex items-center gap-2 mb-1">
+              <Briefcase size={16} className="text-violet-400" />
+              <h1 className="font-display text-2xl sm:text-3xl font-semibold text-[#F9FAFB]">Jobs & Referrals</h1>
             </div>
+            <p className="text-xs sm:text-sm text-[#6B7280]">Find opportunities tailored for students</p>
           </div>
 
           {/* Search + filter */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-fade-up stagger-1">
-            <div className="relative flex-1 max-w-sm">
+          <div className="flex flex-col gap-3 sm:gap-4 mb-5 sm:mb-8 animate-fade-up stagger-1">
+            <div className="relative">
               <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6B7280]" />
               <input
                 value={search}
@@ -122,11 +120,11 @@ export default function Jobs() {
                 className="w-full pl-10 pr-4 py-2.5 rounded-full border border-[#111]/[0.12] bg-[#111111] text-sm text-[#F9FAFB] focus:outline-none focus:border-violet-500 transition-all placeholder:text-[#6B7280]"
               />
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar pb-1">
               {types.map(t => (
                 <button key={t}
                   onClick={() => setFilter(t)}
-                  className={`px-4 py-2 rounded-full text-xs font-medium transition-all
+                  className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-medium transition-all flex-shrink-0
                     ${filter === t
                       ? 'btn-gold text-white'
                       : 'border border-[#111]/[0.12] text-[#6B7280] bg-[#111111] hover:border-violet-500 hover:text-violet-400'
@@ -139,80 +137,87 @@ export default function Jobs() {
           </div>
 
           {/* Stats row */}
-          <div className="grid grid-cols-3 gap-4 mb-8 animate-fade-up stagger-2">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-5 sm:mb-8 animate-fade-up stagger-2">
             {[
               { label: 'Open Positions', value: jobs.length },
-              { label: 'Applications Sent', value: applied.size },
-              { label: 'Saved Jobs', value: saved.size },
+              { label: 'Applications', value: applied.size },
+              { label: 'Saved', value: saved.size },
             ].map(({ label, value }) => (
-              <div key={label} className="card p-4 text-center">
-                <p className="font-display text-2xl font-semibold text-violet-400">{value}</p>
-                <p className="text-xs text-[#6B7280] mt-1">{label}</p>
+              <div key={label} className="card p-3 sm:p-4 text-center">
+                <p className="font-display text-xl sm:text-2xl font-semibold text-violet-400">{value}</p>
+                <p className="text-[10px] sm:text-xs text-[#6B7280] mt-0.5">{label}</p>
               </div>
             ))}
           </div>
 
           {/* Job cards */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {filtered.map((job, idx) => (
               <div key={job.id}
-                className={`card p-5 animate-fade-up ${job.featured ? 'ring-1 ring-[color:var(--accent)]' : ''}`}
+                className={`card p-4 sm:p-5 animate-fade-up ${job.featured ? 'ring-1 ring-violet-700/50' : ''}`}
                 style={{ animationDelay: `${idx * 70}ms` }}
               >
                 {job.featured && (
-                  <div className="flex items-center gap-1.5 mb-3">
+                  <div className="mb-2 sm:mb-3">
                     <span className="text-[10px] font-semibold text-violet-400 uppercase tracking-widest">✦ Featured</span>
                   </div>
                 )}
-                <div className="flex items-start gap-4">
-                  <img src={job.logo} className="w-12 h-12 rounded-xl object-cover border border-[#111]/[0.07] flex-shrink-0" />
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <img src={job.logo} className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl object-cover border border-[#111]/[0.07] flex-shrink-0" />
 
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
-                      <div>
+                      <div className="min-w-0">
                         <h2 className="text-sm font-semibold text-[#F9FAFB] mb-0.5">{job.title}</h2>
-                        <div className="flex items-center gap-1.5 text-xs text-[#6B7280]">
-                          <Building size={11} />
+                        <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-[#6B7280] flex-wrap">
+                          <Building size={10} />
                           <span>{job.company}</span>
-                          <span className="text-[color:var(--border-strong)]">·</span>
-                          <MapPin size={11} />
+                          <span>·</span>
+                          <MapPin size={10} />
                           <span>{job.location}</span>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 flex-shrink-0">
-                        <span className="text-xs font-medium text-violet-400 bg-violet-950/40 border border-[#111]/[0.07] px-2.5 py-1 rounded-full">
+                      <div className="flex items-center gap-1.5 flex-shrink-0">
+                        <span className="hidden sm:block text-xs font-medium text-violet-400 bg-violet-950/40 border border-[#111]/[0.07] px-2.5 py-1 rounded-full">
                           {job.type}
                         </span>
                         <button onClick={() => toggleSave(job.id)}
                           className={`p-1.5 rounded-lg transition-all ${saved.has(job.id) ? 'text-violet-400' : 'text-[#6B7280] hover:text-violet-400'}`}
                         >
-                          <Bookmark size={15} fill={saved.has(job.id) ? 'currentColor' : 'none'} />
+                          <Bookmark size={14} fill={saved.has(job.id) ? 'currentColor' : 'none'} />
                         </button>
                       </div>
                     </div>
 
-                    <p className="text-xs text-[#D1D5DB] mt-2 leading-relaxed">{job.desc}</p>
+                    {/* Mobile job type badge */}
+                    <div className="sm:hidden mt-1.5">
+                      <span className="text-[10px] font-medium text-violet-400 bg-violet-950/40 border border-[#111]/[0.07] px-2 py-0.5 rounded-full">
+                        {job.type}
+                      </span>
+                    </div>
 
-                    <div className="flex flex-wrap gap-1.5 mt-3">
+                    <p className="text-xs text-[#D1D5DB] mt-2 leading-relaxed line-clamp-2">{job.desc}</p>
+
+                    <div className="flex flex-wrap gap-1 sm:gap-1.5 mt-2 sm:mt-3">
                       {job.tags.map(tag => (
-                        <span key={tag} className="px-2.5 py-1 text-[10px] font-medium bg-[#0A0A0A] border border-[#111]/[0.07] text-[#6B7280] rounded-full">
+                        <span key={tag} className="px-2 py-0.5 text-[10px] font-medium bg-[#0A0A0A] border border-[#111]/[0.07] text-[#6B7280] rounded-full">
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    <div className="flex items-center justify-between mt-4">
-                      <div className="flex items-center gap-3 text-xs text-[#6B7280]">
-                        <span className="flex items-center gap-1"><Clock size={11} />{job.posted}</span>
+                    <div className="flex items-center justify-between mt-3">
+                      <div className="flex items-center gap-2 sm:gap-3 text-xs text-[#6B7280]">
+                        <span className="flex items-center gap-1"><Clock size={10} />{job.posted}</span>
                         <span className="font-medium text-[#F9FAFB]">{job.salary}</span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5 sm:gap-2">
                         <button className="p-1.5 rounded-xl text-[#6B7280] hover:text-violet-400 hover:bg-violet-950/40 transition-all">
-                          <ExternalLink size={14} />
+                          <ExternalLink size={13} />
                         </button>
                         <button
                           onClick={() => toggleApply(job.id)}
-                          className={`px-5 py-2 rounded-full text-xs font-semibold transition-all
+                          className={`px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs font-semibold transition-all
                             ${applied.has(job.id)
                               ? 'bg-violet-950/40 text-violet-400 border border-[#111]/[0.12]'
                               : 'btn-gold'
